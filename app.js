@@ -115,7 +115,6 @@ const taskIncomplete = function () {
 }
 
 //Set the click handler to the addTask function.
-addButton.onclick = addTask
 addButton.addEventListener('click', addTask)
 
 const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
