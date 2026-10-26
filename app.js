@@ -84,8 +84,6 @@ const moveTaskToTodo = function () {
     moveTask(this.parentNode, toDoList, moveTaskToCompleted)
 }
 
-addTaskButton.addEventListener('click', addTask)
-
 const bindTaskEvents = function (taskItem, onCheckboxChange) {
     const checkBox = taskItem.querySelector('input[type=checkbox]')
     const editButton = taskItem.querySelector('button.edit')
@@ -96,10 +94,12 @@ const bindTaskEvents = function (taskItem, onCheckboxChange) {
     checkBox.onchange = onCheckboxChange
 }
 
-for (let i = 0; i < toDoList.children.length; i++) {
-    bindTaskEvents(toDoList.children[i], moveTaskToCompleted)
+const bindListEvents = function (taskList, checkboxHandler) {
+    for (const taskItem of taskList.children) {
+        bindTaskEvents(taskItem, checkboxHandler)
+    }
 }
 
-for (let i = 0; i < completedList.children.length; i++) {
-    bindTaskEvents(completedList.children[i], moveTaskToTodo)
-}
+addTaskButton.addEventListener('click', addTask)
+bindListEvents(toDoList, moveTaskToCompleted)
+bindListEvents(completedList, moveTaskToTodo)
