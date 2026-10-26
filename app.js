@@ -7,33 +7,32 @@ const createTaskItem = function (taskText) {
     const taskItem = document.createElement('li')
 
     const checkBox = document.createElement('input')
+    checkBox.type = 'checkbox'
+    taskItem.appendChild(checkBox)
+
     const label = document.createElement('label')
-    const editInput = document.createElement('input')
-    const editButton = document.createElement('button')
-
-    const deleteButton = document.createElement('button')
-    const deleteIcon = document.createElement('img')
-
+    label.className = 'task'
     // innerText, not innerHTML: the task text must stay text
     label.innerText = taskText
-    label.className = 'task'
+    taskItem.appendChild(label)
 
-    checkBox.type = 'checkbox'
+    const editInput = document.createElement('input')
     editInput.type = 'text'
     editInput.className = 'task'
+    taskItem.appendChild(editInput)
 
+    const editButton = document.createElement('button')
     editButton.innerText = 'Edit'
     editButton.className = 'edit'
+    taskItem.appendChild(editButton)
 
+    const deleteButton = document.createElement('button')
     deleteButton.className = 'delete'
+    const deleteIcon = document.createElement('img')
     deleteIcon.src = './remove.svg'
     deleteButton.appendChild(deleteIcon)
-
-    taskItem.appendChild(checkBox)
-    taskItem.appendChild(label)
-    taskItem.appendChild(editInput)
-    taskItem.appendChild(editButton)
     taskItem.appendChild(deleteButton)
+
     return taskItem
 }
 
