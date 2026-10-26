@@ -13,6 +13,7 @@ const createTaskItem = function (taskText) {
 
     const deleteButton = document.createElement('button')
     const deleteIcon = document.createElement('img')
+
     // innerText, not innerHTML: the task text must stay text
     label.innerText = taskText
     label.className = 'task'
@@ -70,16 +71,17 @@ const deleteTask = function () {
     taskList.removeChild(taskItem)
 }
 
+const moveTask = function (taskItem, targetList, nextCheckboxHandler) {
+    targetList.appendChild(taskItem)
+    bindTaskEvents(taskItem, nextCheckboxHandler)
+}
+
 const moveTaskToCompleted = function () {
-    const taskItem = this.parentNode
-    completedList.appendChild(taskItem)
-    bindTaskEvents(taskItem, moveTaskToTodo)
+    moveTask(this.parentNode, completedList, moveTaskToTodo)
 }
 
 const moveTaskToTodo = function () {
-    const taskItem = this.parentNode
-    toDoList.appendChild(taskItem)
-    bindTaskEvents(taskItem, moveTaskToCompleted)
+    moveTask(this.parentNode, toDoList, moveTaskToCompleted)
 }
 
 addTaskButton.addEventListener('click', addTask)
